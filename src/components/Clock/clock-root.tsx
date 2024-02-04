@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { useClockStore } from './store';
+import { useEffect } from "react";
+import { useClockStore } from "./store";
 
 /**
  * Root component for clock. Needs to be the parent of all clock components.
@@ -13,8 +13,8 @@ import { useClockStore } from './store';
  * ```
  */
 
-function ClockRoot({ children }: { children?: React.ReactNode }) {
-  const setTime = useClockStore(state => state.setTime);
+function ClockRoot({ children }: { children: React.ReactNode }) {
+  const setTime = useClockStore((state) => state.setTime);
 
   useEffect(() => {
     const interval = setInterval(() => {
