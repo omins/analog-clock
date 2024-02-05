@@ -6,7 +6,7 @@ function App() {
 
   return (
     <>
-      <div className="mx-auto flex max-w-3xl justify-center gap-3 bg-white p-10 text-black antialiased dark:bg-black">
+      <div className="mx-auto flex max-w-3xl justify-center gap-3 bg-white p-[5rem] text-black antialiased dark:bg-black">
         <div className="flex flex-col items-center justify-center gap-4">
           <div className="h-40 w-40">
             <Tooltip placement="right-end" content={timeString} followCursor>
