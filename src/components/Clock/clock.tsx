@@ -1,13 +1,22 @@
+import { forwardRef, memo } from "react";
 import ClockFace from "./face";
 import ClockHand from "./hand";
 
-function Clock() {
-  return (
-    <div className="relative block h-full w-full  transform rounded-full border border-black">
-      <ClockFace />
-      <ClockHand />
-    </div>
-  );
-}
+type ClockProps = unknown & React.HTMLAttributes<HTMLDivElement>;
 
-export default Clock;
+const Clock = forwardRef<HTMLDivElement, ClockProps>(
+  function Clock(props, ref) {
+    return (
+      <div
+        className="relative z-[50] block h-full w-full rounded-full border border-black"
+        ref={ref}
+        {...props}
+      >
+        <ClockFace />
+        <ClockHand />
+      </div>
+    );
+  },
+);
+
+export default memo(Clock);
