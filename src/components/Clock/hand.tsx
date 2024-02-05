@@ -1,7 +1,7 @@
 import { useHour, useMinute, useSecond } from "./store";
 import { HandVariantProps, handVariant } from "./variants";
 
-function ClockHands() {
+function ClockHand() {
   return (
     <>
       <HourHand />
@@ -49,4 +49,4 @@ function Hand({ angle, variant }: HandProps) {
   );
 }
 
-export default ClockHands;
+export default ClockHand;
