@@ -36,3 +36,12 @@ Open [http://localhost:5173](http://localhost:5173) with your browser to see the
 - [x] The hour hand, minute hand, and second hand (optional) should be shown based on the current time.
 
 - [x] The current time must be shown in a tooltip when hovering on the clock.(The tooltip is located in the upper right corner of the mouse pointer and the position must be updated continuously along the movement of the mouse)
+
+## Additional Notes
+
+- App starts from [`App.tsx`](https://github.com/omins/analog-clock/blob/main/src/App.tsx) file.
+- Please checkout `components` directory for more details.
+  - [Clock component](https://github.com/omins/analog-clock/tree/main/src/components/Clock)
+  - [Tooltip component](https://github.com/omins/analog-clock/tree/main/src/components/Tooltip)
+- State management library has been used for managing time value globally.
+  - Please check [`store.ts`](https://github.com/omins/analog-clock/blob/main/src/components/Clock/store.ts) from clock component.
