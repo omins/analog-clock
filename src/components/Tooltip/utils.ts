@@ -16,6 +16,11 @@ export type ComputeTooltipPositionReturn = {
   tooltipStyle: React.CSSProperties;
 };
 
+export type Position = {
+  x: number;
+  y: number;
+};
+
 export function composeMouseEventHandler(
   handler: (event: React.MouseEvent<HTMLElement>) => void,
   eventHandler: (event: React.MouseEvent<HTMLElement>) => void | undefined,
