@@ -39,11 +39,13 @@ type HandProps = {
 function Hand({ angle, variant }: HandProps) {
   return (
     <div
-      className={handVariant({ variant })}
+      className="absolute bottom-0 left-1/2 right-1/2 top-0"
       style={{
         transform: `rotate(${angle}deg)`,
       }}
-    />
+    >
+      <div className={handVariant({ variant })} />
+    </div>
   );
 }
 
