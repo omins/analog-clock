@@ -2,7 +2,7 @@ import { forwardRef, memo } from "react";
 import ClockFace from "./face";
 import ClockHand from "./hand";
 
-type ClockProps = unknown & React.HTMLAttributes<HTMLDivElement>;
+type ClockProps = React.HTMLAttributes<HTMLDivElement>;
 
 /**
  * To use clock, you need to wrap it with parent that width and height are defined.
