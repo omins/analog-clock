@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { MarkVariantProps, markVariant } from "./variants";
 
 function ClockFace() {
@@ -46,4 +47,4 @@ function Mark({ angle = 0, variant }: MarkProps) {
   );
 }
 
-export default ClockFace;
+export default memo(ClockFace);
