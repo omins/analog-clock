@@ -13,7 +13,8 @@ function ClockHand() {
 
 function HourHand() {
   const hour = useHour();
-  const angle = hour * 30;
+  const minute = useMinute();
+  const angle = hour * 30 + minute * 0.5;
 
   return <Hand angle={angle} variant="hour" />;
 }
