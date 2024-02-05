@@ -1,14 +1,14 @@
 import { memo } from "react";
 import { MarkVariantProps, markVariant } from "./variants";
 
-function ClockFace() {
+const ClockFace = memo(() => {
   return (
     <>
       <CenterMark />
       <MinuteMark />
     </>
   );
-}
+});
 
 function CenterMark() {
   return (
@@ -47,4 +47,4 @@ function Mark({ angle = 0, variant }: MarkProps) {
   );
 }
 
-export default memo(ClockFace);
+export default ClockFace;

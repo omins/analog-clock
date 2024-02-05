@@ -2,7 +2,7 @@ import { memo } from "react";
 import { useHour, useMinute, useSecond } from "./store";
 import { HandVariantProps, handVariant } from "./variants";
 
-function ClockHand() {
+const ClockHand = memo(() => {
   return (
     <>
       <HourHand />
@@ -10,7 +10,7 @@ function ClockHand() {
       <SecondHand />
     </>
   );
-}
+});
 
 function HourHand() {
   const hour = useHour();
@@ -51,4 +51,4 @@ function Hand({ angle, variant }: HandProps) {
   );
 }
 
-export default memo(ClockHand);
+export default ClockHand;
