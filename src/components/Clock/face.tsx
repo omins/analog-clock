@@ -47,4 +47,5 @@ function Mark({ angle = 0, variant }: MarkProps) {
   );
 }
 
+ClockFace.displayName = "ClockFace";
 export default ClockFace;

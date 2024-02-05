@@ -5,7 +5,7 @@ import ClockHand from "./hand";
 type ClockProps = unknown & React.HTMLAttributes<HTMLDivElement>;
 
 const Clock = memo(
-  forwardRef<HTMLDivElement, ClockProps>(function Clock(props, ref) {
+  forwardRef<HTMLDivElement, ClockProps>((props, ref) => {
     return (
       <div
         className="relative z-[50] block h-full w-full rounded-full border border-black"
@@ -19,4 +19,5 @@ const Clock = memo(
   }),
 );
 
+Clock.displayName = "Clock";
 export default Clock;

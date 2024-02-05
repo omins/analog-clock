@@ -51,4 +51,5 @@ function Hand({ angle, variant }: HandProps) {
   );
 }
 
+ClockHand.displayName = "ClockHand";
 export default ClockHand;
