@@ -1,5 +1,6 @@
 import {
   type Placement,
+  VirtualElement,
   computePosition,
   flip,
   offset,
@@ -7,7 +8,7 @@ import {
 } from "@floating-ui/react-dom";
 
 export type ComputeTooltipPositionProps = {
-  elementReference: HTMLElement | null;
+  elementReference: HTMLElement | VirtualElement | null;
   tooltipReference: HTMLElement | null;
   placement?: Placement;
 };

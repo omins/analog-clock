@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Placement } from "@floating-ui/react-dom";
+import { Placement, VirtualElement } from "@floating-ui/react-dom";
 import {
   Position,
   composeMouseEventHandler,
@@ -34,7 +34,7 @@ export function useTooltip({
 
   const handleTooltipPositionChange = useCallback(
     async ({ x, y }: Position) => {
-      const virtualElement = {
+      const virtualElement: VirtualElement = {
         getBoundingClientRect() {
           return {
             width: 0,
@@ -50,7 +50,7 @@ export function useTooltip({
       };
 
       const { tooltipStyle } = await computeTooltipPosition({
-        elementReference: virtualElement as HTMLElement,
+        elementReference: virtualElement,
         tooltipReference: tooltipRef.current,
         placement,
       });
