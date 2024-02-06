@@ -34,6 +34,8 @@ export function useTooltip({
 
   const handleTooltipPositionChange = useCallback(
     async ({ x, y }: Position) => {
+      if (!tooltipRef.current) return;
+
       const virtualElement: VirtualElement = {
         getBoundingClientRect() {
           return {
@@ -57,7 +59,7 @@ export function useTooltip({
 
       setTooltipStyle(tooltipStyle);
     },
-    [tooltipRef, placement],
+    [placement],
   );
 
   const handleMouseMove = useCallback(
@@ -68,6 +70,8 @@ export function useTooltip({
   );
 
   const initTooltipPosition = useCallback(async () => {
+    if (!referenceRef.current || !tooltipRef.current) return;
+
     const { tooltipStyle } = await computeTooltipPosition({
       elementReference: referenceRef.current,
       tooltipReference: tooltipRef.current,
@@ -75,7 +79,7 @@ export function useTooltip({
     });
 
     setTooltipStyle(tooltipStyle);
-  }, [referenceRef, tooltipRef, placement]);
+  }, [placement]);
 
   const childrenProps = {
     ...children.props,
