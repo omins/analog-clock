@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Placement, VirtualElement } from "@floating-ui/react-dom";
+import { Placement, VirtualElement, autoUpdate } from "@floating-ui/react-dom";
 import {
   Position,
   composeMouseEventHandler,
@@ -105,6 +105,22 @@ export function useTooltip({
   useEffect(() => {
     initTooltipPosition();
   }, [initTooltipPosition]);
+
+  useEffect(() => {
+    if (followCursor) return;
+
+    if (isOpen && referenceRef.current && tooltipRef.current) {
+      const cleanup = autoUpdate(
+        referenceRef.current,
+        tooltipRef.current,
+        initTooltipPosition,
+        {
+          animationFrame: true,
+        },
+      );
+      return cleanup;
+    }
+  }, [followCursor, isOpen, initTooltipPosition]);
 
   return {
     content,
