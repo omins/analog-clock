@@ -79,7 +79,14 @@ export function useTooltip({
 
   const childrenProps = {
     ...children.props,
-    ...(followCursor ? { onMouseMove: handleMouseMove } : {}),
+    ...(followCursor
+      ? {
+          onMouseMove: composeMouseEventHandler(
+            handleMouseMove,
+            children.props.onMouseMove,
+          ),
+        }
+      : {}),
     onMouseEnter: composeMouseEventHandler(
       handleEnter,
       children.props.onMouseEnter,
