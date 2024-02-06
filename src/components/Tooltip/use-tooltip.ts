@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Placement } from "@floating-ui/react-dom";
+import { Placement, VirtualElement, autoUpdate } from "@floating-ui/react-dom";
 import {
   Position,
   composeMouseEventHandler,
@@ -34,7 +34,9 @@ export function useTooltip({
 
   const handleTooltipPositionChange = useCallback(
     async ({ x, y }: Position) => {
-      const virtualElement = {
+      if (!tooltipRef.current) return;
+
+      const virtualElement: VirtualElement = {
         getBoundingClientRect() {
           return {
             width: 0,
@@ -50,14 +52,14 @@ export function useTooltip({
       };
 
       const { tooltipStyle } = await computeTooltipPosition({
-        elementReference: virtualElement as HTMLElement,
+        elementReference: virtualElement,
         tooltipReference: tooltipRef.current,
         placement,
       });
 
       setTooltipStyle(tooltipStyle);
     },
-    [tooltipRef, placement],
+    [placement],
   );
 
   const handleMouseMove = useCallback(
@@ -68,6 +70,8 @@ export function useTooltip({
   );
 
   const initTooltipPosition = useCallback(async () => {
+    if (!referenceRef.current || !tooltipRef.current) return;
+
     const { tooltipStyle } = await computeTooltipPosition({
       elementReference: referenceRef.current,
       tooltipReference: tooltipRef.current,
@@ -75,11 +79,18 @@ export function useTooltip({
     });
 
     setTooltipStyle(tooltipStyle);
-  }, [referenceRef, tooltipRef, placement]);
+  }, [placement]);
 
   const childrenProps = {
     ...children.props,
-    ...(followCursor ? { onMouseMove: handleMouseMove } : {}),
+    ...(followCursor
+      ? {
+          onMouseMove: composeMouseEventHandler(
+            handleMouseMove,
+            children.props.onMouseMove,
+          ),
+        }
+      : {}),
     onMouseEnter: composeMouseEventHandler(
       handleEnter,
       children.props.onMouseEnter,
@@ -94,6 +105,22 @@ export function useTooltip({
   useEffect(() => {
     initTooltipPosition();
   }, [initTooltipPosition]);
+
+  useEffect(() => {
+    if (followCursor) return;
+
+    if (isOpen && referenceRef.current && tooltipRef.current) {
+      const cleanup = autoUpdate(
+        referenceRef.current,
+        tooltipRef.current,
+        initTooltipPosition,
+        {
+          animationFrame: true,
+        },
+      );
+      return cleanup;
+    }
+  }, [followCursor, isOpen, initTooltipPosition]);
 
   return {
     content,
